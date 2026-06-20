@@ -1,0 +1,3243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JNM Best Finds | Discover the Best Products, Deals & Recommendations</title>
+    <meta name="description" content="JNM Best Finds - Your trusted source for the best product reviews, deals, and recommendations across Electronics, Home, Automotive, Fashion, Health, Gaming, and more.">
+    <meta name="keywords" content="best products, affiliate deals, product reviews, buying guides, electronics, home, kitchen, automotive, fashion, health, fitness, gaming">
+    <meta property="og:title" content="JNM Best Finds | Discover the Best Products, Deals & Recommendations">
+    <meta property="og:description" content="Your trusted source for curated product reviews and top deals.">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #0F172A;
+            --royal-blue: #2563EB;
+            --gold: #F59E0B;
+            --white: #FFFFFF;
+            --light-gray: #F1F5F9;
+            --text-gray: #64748B;
+            --border: #E2E8F0;
+            --success: #10B981;
+            --danger: #EF4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--white);
+            color: var(--navy);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--light-gray); }
+        ::-webkit-scrollbar-thumb { background: var(--royal-blue); border-radius: 4px; }
+
+        .navbar {
+            background: var(--navy);
+            padding: 0.8rem 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .navbar.sticky {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            animation: slideDown 0.4s ease;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--white) !important;
+        }
+
+        .brand-logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--gold));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+
+        .nav-link {
+            color: rgba(255,255,255,0.85) !important;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.5rem 1rem !important;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover, .nav-link.active { color: var(--gold) !important; }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 1rem;
+            right: 1rem;
+            height: 2px;
+            background: var(--gold);
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after { transform: scaleX(1); }
+
+        .search-box { position: relative; }
+
+        .search-box input {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 50px;
+            padding: 0.5rem 1rem 0.5rem 2.5rem;
+            color: var(--white);
+            width: 250px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box input:focus {
+            background: rgba(255,255,255,0.15);
+            border-color: var(--gold);
+            outline: none;
+            width: 300px;
+        }
+
+        .search-box input::placeholder { color: rgba(255,255,255,0.5); }
+
+        .search-box i {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255,255,255,0.5);
+        }
+
+        .live-search-results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-top: 0.5rem;
+            max-height: 400px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1001;
+        }
+
+        .live-search-results.show { display: block; }
+
+        .search-result-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-result-item:hover { background: var(--light-gray); }
+
+        .search-result-item img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, #1e293b 50%, var(--royal-blue) 100%);
+            padding: 8rem 0 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(245,158,11,0.15) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(37,99,235,0.2) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content { position: relative; z-index: 2; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(245,158,11,0.2);
+            border: 1px solid rgba(245,158,11,0.3);
+            color: var(--gold);
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: var(--white);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 span {
+            color: var(--gold);
+            position: relative;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.8);
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+
+        .btn-primary-custom {
+            background: linear-gradient(135deg, var(--gold), #d97706);
+            color: var(--navy);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(245,158,11,0.4);
+        }
+
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(245,158,11,0.5);
+            color: var(--navy);
+        }
+
+        .btn-outline-custom {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid rgba(255,255,255,0.3);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-custom:hover {
+            background: var(--white);
+            color: var(--navy);
+            border-color: var(--white);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .hero-stat { text-align: center; }
+
+        .hero-stat-number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .hero-stat-label {
+            font-size: 0.85rem;
+            color: rgba(255,255,255,0.7);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .hero-image { position: relative; z-index: 2; }
+
+        .hero-image img {
+            border-radius: 20px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            transform: rotate(-3deg);
+            transition: transform 0.5s ease;
+        }
+
+        .hero-image:hover img { transform: rotate(0deg) scale(1.02); }
+
+        .floating-card {
+            position: absolute;
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .floating-card-1 { top: 10%; right: -20px; animation-delay: 0s; }
+        .floating-card-2 { bottom: 20%; left: -30px; animation-delay: 1.5s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .section-padding { padding: 5rem 0; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 0.75rem;
+        }
+
+        .section-header p {
+            color: var(--text-gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-line {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--royal-blue), var(--gold));
+            border-radius: 2px;
+            margin: 1rem auto 0;
+        }
+
+        .category-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            height: 100%;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border-color: var(--royal-blue);
+        }
+
+        .category-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--royal-blue), #3b82f6);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 1.8rem;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .category-card:hover .category-icon {
+            background: linear-gradient(135deg, var(--gold), #d97706);
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .category-card h4 { font-weight: 700; margin-bottom: 0.5rem; }
+        .category-card p { color: var(--text-gray); font-size: 0.9rem; }
+
+        .category-count {
+            display: inline-block;
+            background: var(--light-gray);
+            color: var(--royal-blue);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 0.75rem;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.12);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover .product-image img { transform: scale(1.1); }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, var(--gold), #d97706);
+            color: var(--white);
+            padding: 0.35rem 0.9rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .product-badge.bestseller { background: linear-gradient(135deg, var(--success), #059669); }
+        .product-badge.deal { background: linear-gradient(135deg, var(--danger), #dc2626); }
+
+        .product-wishlist {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .product-wishlist:hover { background: var(--danger); color: var(--white); }
+
+        .product-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-category {
+            color: var(--royal-blue);
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+            color: var(--navy);
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .stars { color: var(--gold); font-size: 0.9rem; }
+        .rating-text { font-size: 0.85rem; color: var(--text-gray); }
+
+        .product-price {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 1rem;
+        }
+
+        .product-price .original {
+            font-size: 1rem;
+            color: var(--text-gray);
+            text-decoration: line-through;
+            font-weight: 400;
+            margin-left: 0.5rem;
+        }
+
+        .product-features {
+            list-style: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .product-features li {
+            font-size: 0.85rem;
+            color: var(--text-gray);
+            padding: 0.25rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .product-features li i { color: var(--success); font-size: 0.75rem; }
+
+        .btn-affiliate {
+            background: linear-gradient(135deg, var(--royal-blue), #1d4ed8);
+            color: var(--white);
+            border: none;
+            padding: 0.85rem 1.5rem;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            width: 100%;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: auto;
+        }
+
+        .btn-affiliate:hover {
+            background: linear-gradient(135deg, #1d4ed8, #1e40af);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37,99,235,0.3);
+            color: var(--white);
+        }
+
+        .blog-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.4s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .blog-image {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-image img { transform: scale(1.1); }
+
+        .blog-date {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: var(--white);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--navy);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .blog-body {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.85rem;
+            color: var(--text-gray);
+        }
+
+        .blog-meta i { color: var(--royal-blue); }
+
+        .blog-title {
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+            color: var(--navy);
+            transition: color 0.3s ease;
+        }
+
+        .blog-card:hover .blog-title { color: var(--royal-blue); }
+
+        .blog-excerpt {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            flex: 1;
+        }
+
+        .read-more {
+            color: var(--royal-blue);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover { color: var(--gold); gap: 0.75rem; }
+
+        .comparison-section { background: linear-gradient(135deg, var(--light-gray), #e2e8f0); }
+
+        .comparison-table-wrapper {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .comparison-table { width: 100%; margin-bottom: 0; }
+
+        .comparison-table th {
+            background: var(--navy);
+            color: var(--white);
+            padding: 1.25rem 1rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            border: none;
+        }
+
+        .comparison-table th:first-child { border-radius: 20px 0 0 0; }
+        .comparison-table th.product-col { text-align: center; min-width: 180px; }
+        .comparison-table th.product-col img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 12px;
+            margin-bottom: 0.5rem;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+
+        .comparison-table tr:hover td { background: var(--light-gray); }
+
+        .feature-label { font-weight: 600; color: var(--navy); }
+        .check-icon { color: var(--success); font-size: 1.2rem; }
+        .cross-icon { color: var(--danger); font-size: 1.2rem; }
+
+        .winner-badge {
+            background: linear-gradient(135deg, var(--gold), #d97706);
+            color: var(--white);
+            padding: 0.25rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .testimonial-card:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+        .testimonial-quote {
+            font-size: 3rem;
+            color: var(--gold);
+            opacity: 0.3;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: var(--text-gray);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .testimonial-name { font-weight: 700; color: var(--navy); margin-bottom: 0.1rem; }
+        .testimonial-role { font-size: 0.85rem; color: var(--text-gray); }
+
+        .newsletter-section {
+            background: linear-gradient(135deg, var(--navy), #1e3a5f);
+            padding: 5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .newsletter-content { position: relative; z-index: 2; }
+
+        .newsletter-form {
+            display: flex;
+            gap: 0.75rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 1rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            font-size: 1rem;
+        }
+
+        .newsletter-form input::placeholder { color: rgba(255,255,255,0.5); }
+        .newsletter-form input:focus {
+            outline: none;
+            border-color: var(--gold);
+            background: rgba(255,255,255,0.15);
+        }
+
+        .footer {
+            background: var(--navy);
+            color: rgba(255,255,255,0.8);
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-about {
+            color: rgba(255,255,255,0.6);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-title {
+            color: var(--white);
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.75rem; }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .footer-links a:hover { color: var(--gold); padding-left: 5px; }
+
+        .social-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--gold);
+            color: var(--navy);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 3rem;
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .breadcrumbs {
+            background: var(--light-gray);
+            padding: 1rem 0;
+        }
+
+        .breadcrumbs a {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .breadcrumbs a:hover { color: var(--royal-blue); }
+        .breadcrumbs .active { color: var(--navy); font-weight: 600; }
+        .breadcrumbs i { color: var(--text-gray); font-size: 0.75rem; margin: 0 0.5rem; }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--gold));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(37,99,235,0.4);
+        }
+
+        .back-to-top.show { opacity: 1; visibility: visible; }
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(37,99,235,0.5);
+        }
+
+        .dark-mode-toggle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-left: 0.5rem;
+        }
+
+        .dark-mode-toggle:hover { background: var(--gold); color: var(--navy); }
+
+        body.dark-mode {
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+
+        body.dark-mode .product-card,
+        body.dark-mode .blog-card,
+        body.dark-mode .category-card,
+        body.dark-mode .testimonial-card,
+        body.dark-mode .comparison-table-wrapper {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark-mode .section-header h2,
+        body.dark-mode .product-title,
+        body.dark-mode .blog-title,
+        body.dark-mode .feature-label,
+        body.dark-mode .testimonial-name,
+        body.dark-mode .product-price,
+        body.dark-mode .category-card h4 { color: #f1f5f9; }
+
+        body.dark-mode .section-header p,
+        body.dark-mode .product-features li,
+        body.dark-mode .blog-excerpt,
+        body.dark-mode .testimonial-text,
+        body.dark-mode .category-card p,
+        body.dark-mode .rating-text { color: #94a3b8; }
+
+        body.dark-mode .breadcrumbs { background: #1e293b; }
+        body.dark-mode .comparison-section { background: linear-gradient(135deg, #1e293b, #0f172a); }
+
+        .admin-panel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #f8fafc;
+            z-index: 9999;
+            overflow-y: auto;
+        }
+
+        .admin-panel.active { display: block; }
+
+        .admin-sidebar {
+            width: 260px;
+            background: var(--navy);
+            min-height: 100vh;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .admin-main {
+            margin-left: 260px;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--white);
+            font-weight: 800;
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .admin-menu { list-style: none; }
+        .admin-menu-item { margin-bottom: 0.5rem; }
+
+        .admin-menu-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 0.85rem 1rem;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .admin-menu-link:hover, .admin-menu-link.active {
+            background: rgba(37,99,235,0.2);
+            color: var(--white);
+        }
+
+        .admin-menu-link i { width: 20px; text-align: center; }
+
+        .admin-header {
+            background: var(--white);
+            padding: 1rem 2rem;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .stat-icon.blue { background: rgba(37,99,235,0.1); color: var(--royal-blue); }
+        .stat-icon.green { background: rgba(16,185,129,0.1); color: var(--success); }
+        .stat-icon.orange { background: rgba(245,158,11,0.1); color: var(--gold); }
+        .stat-icon.red { background: rgba(239,68,68,0.1); color: var(--danger); }
+
+        .stat-value { font-size: 1.8rem; font-weight: 800; color: var(--navy); }
+        .stat-label { font-size: 0.9rem; color: var(--text-gray); }
+
+        .admin-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .admin-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .admin-card-title { font-weight: 700; font-size: 1.2rem; color: var(--navy); }
+
+        .btn-admin {
+            padding: 0.6rem 1.2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            border: none;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-admin-primary {
+            background: linear-gradient(135deg, var(--royal-blue), #1d4ed8);
+            color: var(--white);
+        }
+
+        .btn-admin-primary:hover {
+            box-shadow: 0 4px 15px rgba(37,99,235,0.3);
+            transform: translateY(-2px);
+            color: var(--white);
+        }
+
+        .btn-admin-danger {
+            background: linear-gradient(135deg, var(--danger), #dc2626);
+            color: var(--white);
+        }
+
+        .admin-table { width: 100%; }
+
+        .admin-table th {
+            background: var(--light-gray);
+            padding: 1rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--navy);
+            text-align: left;
+        }
+
+        .admin-table td {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.9rem;
+        }
+
+        .admin-table tr:hover td { background: var(--light-gray); }
+
+        .status-badge {
+            padding: 0.35rem 0.75rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-published { background: rgba(16,185,129,0.1); color: var(--success); }
+        .status-draft { background: rgba(245,158,11,0.1); color: var(--gold); }
+        .status-scheduled { background: rgba(37,99,235,0.1); color: var(--royal-blue); }
+
+        .action-btns { display: flex; gap: 0.5rem; }
+
+        .action-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .action-btn.edit { background: rgba(37,99,235,0.1); color: var(--royal-blue); }
+        .action-btn.delete { background: rgba(239,68,68,0.1); color: var(--danger); }
+        .action-btn.view { background: rgba(16,185,129,0.1); color: var(--success); }
+        .action-btn:hover { transform: scale(1.1); }
+
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
+
+        .modal-overlay.show { display: flex; }
+
+        .modal-content {
+            background: var(--white);
+            border-radius: 20px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            animation: modalIn 0.3s ease;
+        }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title { font-weight: 700; font-size: 1.3rem; }
+
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: none;
+            background: var(--light-gray);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .modal-close:hover { background: var(--danger); color: var(--white); }
+
+        .form-group { margin-bottom: 1.25rem; }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            display: block;
+            color: var(--navy);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--royal-blue);
+            box-shadow: 0 0 0 4px rgba(37,99,235,0.1);
+        }
+
+        textarea.form-control { min-height: 150px; resize: vertical; }
+
+        .form-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 0.95rem;
+            background: var(--white);
+            cursor: pointer;
+        }
+
+        .login-modal .modal-content { max-width: 450px; text-align: center; }
+
+        .login-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--royal-blue), var(--gold));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: var(--white);
+        }
+
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10001;
+        }
+
+        .toast {
+            background: var(--white);
+            border-radius: 12px;
+            padding: 1rem 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.75rem;
+            animation: toastIn 0.4s ease;
+            border-left: 4px solid var(--success);
+        }
+
+        .toast.error { border-left-color: var(--danger); }
+        .toast.warning { border-left-color: var(--gold); }
+
+        @keyframes toastIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        .chart-container {
+            height: 300px;
+            background: linear-gradient(135deg, var(--light-gray), #e2e8f0);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chart-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 1rem;
+            height: 200px;
+            padding: 0 2rem;
+        }
+
+        .chart-bar {
+            width: 40px;
+            background: linear-gradient(to top, var(--royal-blue), #60a5fa);
+            border-radius: 6px 6px 0 0;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .chart-bar:hover { background: linear-gradient(to top, var(--gold), #fbbf24); }
+
+        .chart-bar-label {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            white-space: nowrap;
+        }
+
+        @media (max-width: 991px) {
+            .hero h1 { font-size: 2.5rem; }
+            .admin-sidebar { width: 80px; }
+            .admin-sidebar .admin-logo span,
+            .admin-sidebar .admin-menu-link span { display: none; }
+            .admin-main { margin-left: 80px; }
+        }
+
+        @media (max-width: 767px) {
+            .hero { padding: 6rem 0 4rem; }
+            .hero h1 { font-size: 2rem; }
+            .hero-stats { gap: 1.5rem; }
+            .section-header h2 { font-size: 1.8rem; }
+            .newsletter-form { flex-direction: column; }
+            .admin-sidebar { display: none; }
+            .admin-main { margin-left: 0; }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .page-section { display: none; padding: 0; }
+        .page-section.active { display: block; }
+
+        .product-gallery {
+            border-radius: 20px;
+            overflow: hidden;
+            background: var(--white);
+            border: 1px solid var(--border);
+        }
+
+        .product-gallery img { width: 100%; height: 400px; object-fit: cover; }
+
+        .product-info h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .pros-cons {
+            background: var(--light-gray);
+            border-radius: 16px;
+            padding: 1.5rem;
+        }
+
+        .pros-cons h5 {
+            font-weight: 700;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .pros-cons.pros h5 { color: var(--success); }
+        .pros-cons.cons h5 { color: var(--danger); }
+
+        .pros-cons ul { list-style: none; padding: 0; }
+
+        .pros-cons li {
+            padding: 0.4rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .share-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+        }
+
+        .share-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .share-btn.facebook { background: #1877f2; }
+        .share-btn.twitter { background: #1da1f2; }
+        .share-btn.pinterest { background: #bd081c; }
+        .share-btn.linkedin { background: #0077b5; }
+        .share-btn.whatsapp { background: #25d366; }
+        .share-btn:hover { transform: translateY(-3px); color: var(--white); }
+
+        .related-posts {
+            border-top: 1px solid var(--border);
+            padding-top: 2rem;
+            margin-top: 2rem;
+        }
+
+        .lazy-img { opacity: 0; transition: opacity 0.5s ease; }
+        .lazy-img.loaded { opacity: 1; }
+    </style>
+</head>
+<body>
+    <div class="toast-container" id="toastContainer"></div>
+    <div class="back-to-top" id="backToTop" onclick="scrollToTop()"><i class="fas fa-arrow-up"></i></div>
+
+    <nav class="navbar navbar-expand-lg" id="navbar">
+        <div class="container">
+            <a class="navbar-brand" href="#" onclick="showPage('home')">
+                <div class="brand-logo"><i class="fas fa-search"></i></div>
+                JNM Best Finds
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link active" href="#" onclick="showPage('home')">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('blog')">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('products')">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('comparisons')">Comparisons</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('about')">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" onclick="showPage('contact')">Contact</a></li>
+                </ul>
+                <div class="d-flex align-items-center gap-2">
+                    <div class="search-box position-relative">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search products, reviews..." id="searchInput" onkeyup="handleSearch(this.value)">
+                        <div class="live-search-results" id="searchResults"></div>
+                    </div>
+                    <button class="dark-mode-toggle" onclick="toggleDarkMode()" title="Toggle Dark Mode">
+                        <i class="fas fa-moon" id="darkModeIcon"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-light" onclick="showLoginModal()">
+                        <i class="fas fa-lock me-1"></i> Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="mainContent">
+        <!-- HOME PAGE -->
+        <div id="page-home" class="page-section active">
+            <section class="hero">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 hero-content">
+                            <div class="hero-badge"><i class="fas fa-star"></i> Trusted by 50,000+ Shoppers</div>
+                            <h1>Discover the <span>Best Products</span>, Deals & Recommendations</h1>
+                            <p>Expert-curated reviews, honest comparisons, and exclusive deals to help you make the perfect purchase every time.</p>
+                            <div class="d-flex gap-3 flex-wrap">
+                                <button class="btn-primary-custom" onclick="showPage('products')"><i class="fas fa-fire me-2"></i>Explore Deals</button>
+                                <button class="btn-outline-custom" onclick="showPage('blog')"><i class="fas fa-book-open me-2"></i>Read Reviews</button>
+                            </div>
+                            <div class="hero-stats">
+                                <div class="hero-stat"><div class="hero-stat-number">1,200+</div><div class="hero-stat-label">Products</div></div>
+                                <div class="hero-stat"><div class="hero-stat-number">850+</div><div class="hero-stat-label">Reviews</div></div>
+                                <div class="hero-stat"><div class="hero-stat-number">50K+</div><div class="hero-stat-label">Readers</div></div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 hero-image d-none d-lg-block">
+                            <div style="position: relative;">
+                                <img src="https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=600&h=450&fit=crop" alt="Shopping" class="img-fluid" loading="lazy">
+                                <div class="floating-card floating-card-1">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="fas fa-check-circle text-success"></i>
+                                        <div><div class="fw-bold" style="font-size:0.9rem;">Best Price Found</div><div style="font-size:0.75rem;color:var(--text-gray);">Save $120 today</div></div>
+                                    </div>
+                                </div>
+                                <div class="floating-card floating-card-2">
+                                    <div class="d-flex align-items-center gap-2">
+                                        <i class="fas fa-star text-warning"></i>
+                                        <div><div class="fw-bold" style="font-size:0.9rem;">4.9/5 Rating</div><div style="font-size:0.75rem;color:var(--text-gray);">2,340 reviews</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding" style="background: var(--light-gray);">
+                <div class="container">
+                    <div class="section-header fade-in">
+                        <h2>Browse by Category</h2>
+                        <p>Find exactly what you need across our curated categories</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="row g-4" id="categoriesGrid"></div>
+                </div>
+            </section>
+
+            <section class="section-padding">
+                <div class="container">
+                    <div class="section-header fade-in">
+                        <h2>Featured Products</h2>
+                        <p>Hand-picked top-rated products with the best deals</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="row g-4" id="featuredProducts"></div>
+                    <div class="text-center mt-5">
+                        <button class="btn-primary-custom" onclick="showPage('products')">View All Products <i class="fas fa-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding" style="background: linear-gradient(135deg, #fef3c7, #fde68a);">
+                <div class="container">
+                    <div class="section-header fade-in">
+                        <h2 style="color:var(--navy);">Top Deals Today</h2>
+                        <p>Limited-time offers you do not want to miss</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="row g-4" id="topDeals"></div>
+                </div>
+            </section>
+
+            <section class="section-padding comparison-section">
+                <div class="container">
+                    <div class="section-header fade-in">
+                        <h2>Featured Comparison</h2>
+                        <p>Side-by-side comparison to help you decide</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="comparison-table-wrapper fade-in">
+                        <div class="table-responsive">
+                            <table class="comparison-table" id="comparisonTable"></table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding">
+                <div class="container">
+                    <div class="section-header fade-in">
+                        <h2>Latest from the Blog</h2>
+                        <p>Expert buying guides, reviews, and tips</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="row g-4" id="latestBlogPosts"></div>
+                    <div class="text-center mt-5">
+                        <button class="btn-primary-custom" onclick="showPage('blog')">View All Articles <i class="fas fa-arrow-right ms-2"></i></button>
+                    </div>
+                </div>
+            </section>
+
+            <section class="section-padding" style="background: var(--light-gray);">
+                <div class="container">
+                    <div class="section-header fade-in">
+                        <h2>Trending Reviews</h2>
+                        <p>Most popular reviews this week</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="row g-4" id="trendingReviews"></div>
+                </div>
+            </section>
+
+            <section class="section-padding">
+                <div class="container">
+                    <div class="section-header fade-in">
+                        <h2>What Our Readers Say</h2>
+                        <p>Join thousands of satisfied shoppers</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="row g-4" id="testimonials"></div>
+                </div>
+            </section>
+
+            <section class="newsletter-section">
+                <div class="container newsletter-content">
+                    <div class="row justify-content-center text-center">
+                        <div class="col-lg-6">
+                            <h2 class="text-white mb-3" style="font-family:'Playfair Display',serif;font-size:2.2rem;">Never Miss a Deal</h2>
+                            <p class="text-white-50 mb-4">Subscribe to our newsletter and get the best deals, reviews, and buying guides delivered to your inbox weekly.</p>
+                            <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+                                <input type="email" placeholder="Enter your email address" required id="newsletterEmail">
+                                <button type="submit" class="btn-primary-custom" style="white-space:nowrap;"><i class="fas fa-paper-plane me-2"></i>Subscribe</button>
+                            </form>
+                            <p class="mt-3" style="font-size:0.85rem;color:rgba(255,255,255,0.5);"><i class="fas fa-shield-alt me-1"></i> No spam. Unsubscribe anytime.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- BLOG PAGE -->
+        <div id="page-blog" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Blog</span>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Our Blog</h2>
+                        <p>Expert buying guides, in-depth reviews, and money-saving tips</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="row g-4" id="blogPostsGrid"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PRODUCTS PAGE -->
+        <div id="page-products" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Products</span>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>All Products</h2>
+                        <p>Browse our complete collection of reviewed and recommended products</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <select class="form-select" id="productFilter" onchange="filterProducts()">
+                                <option value="all">All Categories</option>
+                                <option value="electronics">Electronics & Gadgets</option>
+                                <option value="home">Home & Kitchen</option>
+                                <option value="automotive">Automotive</option>
+                                <option value="fashion">Fashion & Lifestyle</option>
+                                <option value="health">Health & Fitness</option>
+                                <option value="gaming">Gaming & Entertainment</option>
+                                <option value="baby">Baby & Kids</option>
+                                <option value="books">Books & Learning</option>
+                                <option value="software">Software & Digital Tools</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row g-4" id="allProductsGrid"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- COMPARISONS PAGE -->
+        <div id="page-comparisons" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Comparisons</span>
+                </div>
+            </div>
+            <section class="section-padding comparison-section">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Product Comparisons</h2>
+                        <p>Compare top products side by side to make the best choice</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div id="comparisonsList"></div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PRODUCT DETAIL PAGE -->
+        <div id="page-product-detail" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="#" onclick="showPage('products')">Products</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active" id="productDetailBreadcrumb">Product</span>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container" id="productDetailContent"></div>
+            </section>
+        </div>
+
+        <!-- BLOG DETAIL PAGE -->
+        <div id="page-blog-detail" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <a href="#" onclick="showPage('blog')">Blog</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active" id="blogDetailBreadcrumb">Article</span>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container" id="blogDetailContent"></div>
+            </section>
+        </div>
+
+        <!-- ABOUT PAGE -->
+        <div id="page-about" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">About Us</span>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 mb-4 mb-lg-0">
+                            <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&h=400&fit=crop" alt="Team" class="img-fluid rounded-4 shadow-lg">
+                        </div>
+                        <div class="col-lg-6">
+                            <h2 style="font-family:'Playfair Display',serif;font-weight:800;font-size:2.5rem;margin-bottom:1.5rem;">About JNM Best Finds</h2>
+                            <p style="color:var(--text-gray);font-size:1.1rem;line-height:1.8;margin-bottom:1.5rem;">JNM Best Finds is your trusted destination for honest, in-depth product reviews and curated recommendations. Founded with a mission to help consumers make informed purchasing decisions, we rigorously test and evaluate thousands of products across every category.</p>
+                            <p style="color:var(--text-gray);font-size:1.1rem;line-height:1.8;margin-bottom:1.5rem;">Our team of expert reviewers spends hundreds of hours researching, testing, and comparing products so you do not have to. We partner with leading retailers to bring you exclusive deals and the best prices available.</p>
+                            <div class="row g-3 mt-3">
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="brand-logo" style="width:50px;height:50px;font-size:1.2rem;"><i class="fas fa-award"></i></div>
+                                        <div><div class="fw-bold">Expert Reviews</div><div style="font-size:0.85rem;color:var(--text-gray);">By industry professionals</div></div>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="d-flex align-items-center gap-3">
+                                        <div class="brand-logo" style="width:50px;height:50px;font-size:1.2rem;"><i class="fas fa-hand-holding-usd"></i></div>
+                                        <div><div class="fw-bold">Best Prices</div><div style="font-size:0.85rem;color:var(--text-gray);">Curated deals daily</div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- CONTACT PAGE -->
+        <div id="page-contact" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Contact Us</span>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container">
+                    <div class="section-header">
+                        <h2>Get In Touch</h2>
+                        <p>Have questions or suggestions? We would love to hear from you</p>
+                        <div class="section-line"></div>
+                    </div>
+                    <div class="row g-4">
+                        <div class="col-lg-8">
+                            <div class="admin-card">
+                                <form onsubmit="handleContact(event)">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label class="form-label">Your Name</label>
+                                            <input type="text" class="form-control" placeholder="John Doe" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label class="form-label">Email Address</label>
+                                            <input type="email" class="form-control" placeholder="john@example.com" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Subject</label>
+                                            <input type="text" class="form-control" placeholder="How can we help?" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <label class="form-label">Message</label>
+                                            <textarea class="form-control" rows="5" placeholder="Your message..." required></textarea>
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn-primary-custom"><i class="fas fa-paper-plane me-2"></i>Send Message</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="admin-card mb-4">
+                                <h5 class="fw-bold mb-3"><i class="fas fa-envelope text-primary me-2"></i>Email Us</h5>
+                                <p class="text-muted mb-0">hello@jnmbestfinds.com</p>
+                            </div>
+                            <div class="admin-card mb-4">
+                                <h5 class="fw-bold mb-3"><i class="fas fa-clock text-primary me-2"></i>Response Time</h5>
+                                <p class="text-muted mb-0">Within 24-48 hours</p>
+                            </div>
+                            <div class="admin-card">
+                                <h5 class="fw-bold mb-3"><i class="fas fa-share-alt text-primary me-2"></i>Follow Us</h5>
+                                <div class="social-links">
+                                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                                    <a href="#"><i class="fab fa-twitter"></i></a>
+                                    <a href="#"><i class="fab fa-instagram"></i></a>
+                                    <a href="#"><i class="fab fa-pinterest"></i></a>
+                                    <a href="#"><i class="fab fa-youtube"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- PRIVACY POLICY PAGE -->
+        <div id="page-privacy" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Privacy Policy</span>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container">
+                    <div class="admin-card">
+                        <h2 class="mb-4" style="font-family:'Playfair Display',serif;font-weight:800;">Privacy Policy</h2>
+                        <p class="text-muted mb-4">Last updated: June 20, 2026</p>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">1. Information We Collect</h4>
+                            <p class="text-muted">We collect information you provide directly to us, including your name, email address, and any other information you choose to provide when subscribing to our newsletter or contacting us.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">2. How We Use Your Information</h4>
+                            <p class="text-muted">We use the information we collect to provide, maintain, and improve our services, to communicate with you, and to send you newsletters and promotional materials.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">3. Affiliate Disclosure</h4>
+                            <p class="text-muted">JNM Best Finds participates in affiliate marketing programs. This means we may earn commissions on purchases made through our affiliate links at no additional cost to you.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">4. Cookies</h4>
+                            <p class="text-muted">We use cookies to enhance your browsing experience, analyze site traffic, and personalize content. You can control cookies through your browser settings.</p>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-3">5. Contact Us</h4>
+                            <p class="text-muted">If you have any questions about this Privacy Policy, please contact us at hello@jnmbestfinds.com.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- DISCLAIMER PAGE -->
+        <div id="page-disclaimer" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Disclaimer</span>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container">
+                    <div class="admin-card">
+                        <h2 class="mb-4" style="font-family:'Playfair Display',serif;font-weight:800;">Disclaimer</h2>
+                        <p class="text-muted mb-4">The information provided on JNM Best Finds is for general informational purposes only.</p>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">Accuracy of Information</h4>
+                            <p class="text-muted">While we strive to keep the information up to date and correct, we make no representations or warranties of any kind about the completeness, accuracy, reliability, or availability of the website or the information contained on it.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">External Links</h4>
+                            <p class="text-muted">Our website may contain links to external sites that are not operated by us. We have no control over the content and practices of these sites and cannot accept responsibility for their respective privacy policies.</p>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-3">Professional Advice</h4>
+                            <p class="text-muted">The information on this website does not constitute professional advice. Always seek the advice of qualified professionals regarding any specific questions or concerns.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- AFFILIATE DISCLOSURE PAGE -->
+        <div id="page-affiliate" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Affiliate Disclosure</span>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container">
+                    <div class="admin-card">
+                        <h2 class="mb-4" style="font-family:'Playfair Display',serif;font-weight:800;">Affiliate Disclosure</h2>
+                        <p class="text-muted mb-4">JNM Best Finds is a participant in several affiliate advertising programs designed to provide a means for sites to earn advertising fees.</p>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">Our Affiliate Partners</h4>
+                            <p class="text-muted">We participate in affiliate programs including but not limited to Amazon Associates, ShareASale, CJ Affiliate, and other retailer affiliate programs. When you click on an affiliate link and make a purchase, we may receive a small commission at no additional cost to you.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">Our Commitment to Integrity</h4>
+                            <p class="text-muted">Our reviews and recommendations are based on thorough research, hands-on testing, and expert analysis. Affiliate partnerships do not influence our editorial content or product ratings. We only recommend products we genuinely believe in.</p>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-3">Thank You</h4>
+                            <p class="text-muted">By using our affiliate links, you help support our website and allow us to continue providing free, high-quality content. Thank you for your support!</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- TERMS PAGE -->
+        <div id="page-terms" class="page-section">
+            <div class="breadcrumbs">
+                <div class="container">
+                    <a href="#" onclick="showPage('home')">Home</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span class="active">Terms & Conditions</span>
+                </div>
+            </div>
+            <section class="section-padding">
+                <div class="container">
+                    <div class="admin-card">
+                        <h2 class="mb-4" style="font-family:'Playfair Display',serif;font-weight:800;">Terms & Conditions</h2>
+                        <p class="text-muted mb-4">Last updated: June 20, 2026</p>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">1. Acceptance of Terms</h4>
+                            <p class="text-muted">By accessing and using JNM Best Finds, you accept and agree to be bound by these Terms and Conditions. If you do not agree, please do not use our website.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">2. Use of Website</h4>
+                            <p class="text-muted">You agree to use our website for lawful purposes only. You must not use our website in any way that causes damage to the website or impairment of its availability.</p>
+                        </div>
+                        <div class="mb-4">
+                            <h4 class="fw-bold mb-3">3. Intellectual Property</h4>
+                            <p class="text-muted">All content on this website, including text, graphics, logos, and images, is the property of JNM Best Finds and is protected by copyright and other intellectual property laws.</p>
+                        </div>
+                        <div>
+                            <h4 class="fw-bold mb-3">4. Limitation of Liability</h4>
+                            <p class="text-muted">In no event shall JNM Best Finds be liable for any indirect, incidental, or consequential damages arising out of or in connection with your use of the website.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <!-- ADMIN PANEL -->
+    <div class="admin-panel" id="adminPanel">
+        <div class="admin-sidebar">
+            <div class="admin-logo">
+                <div class="brand-logo"><i class="fas fa-search"></i></div>
+                <span>JNM Admin</span>
+            </div>
+            <ul class="admin-menu">
+                <li class="admin-menu-item"><a href="#" class="admin-menu-link active" onclick="showAdminSection('dashboard')"><i class="fas fa-tachometer-alt"></i><span>Dashboard</span></a></li>
+                <li class="admin-menu-item"><a href="#" class="admin-menu-link" onclick="showAdminSection('posts')"><i class="fas fa-blog"></i><span>Blog Posts</span></a></li>
+                <li class="admin-menu-item"><a href="#" class="admin-menu-link" onclick="showAdminSection('products')"><i class="fas fa-box"></i><span>Products</span></a></li>
+                <li class="admin-menu-item"><a href="#" class="admin-menu-link" onclick="showAdminSection('categories')"><i class="fas fa-tags"></i><span>Categories</span></a></li>
+                <li class="admin-menu-item"><a href="#" class="admin-menu-link" onclick="showAdminSection('media')"><i class="fas fa-images"></i><span>Media Library</span></a></li>
+                <li class="admin-menu-item"><a href="#" class="admin-menu-link" onclick="showAdminSection('seo')"><i class="fas fa-search"></i><span>SEO Settings</span></a></li>
+                <li class="admin-menu-item"><a href="#" class="admin-menu-link" onclick="showAdminSection('affiliate')"><i class="fas fa-chart-line"></i><span>Affiliate Tracking</span></a></li>
+                <li class="admin-menu-item"><a href="#" class="admin-menu-link" onclick="showAdminSection('newsletter')"><i class="fas fa-envelope"></i><span>Newsletter</span></a></li>
+                <li class="admin-menu-item"><a href="#" class="admin-menu-link" onclick="showAdminSection('settings')"><i class="fas fa-cog"></i><span>Settings</span></a></li>
+                <li class="admin-menu-item"><a href="#" class="admin-menu-link" onclick="logoutAdmin()"><i class="fas fa-sign-out-alt"></i><span>Logout</span></a></li>
+            </ul>
+        </div>
+        <div class="admin-main">
+            <!-- Dashboard -->
+            <div id="admin-dashboard" class="admin-section active">
+                <div class="admin-header">
+                    <h4 class="fw-bold m-0">Dashboard Overview</h4>
+                    <button class="btn-admin btn-admin-primary" onclick="closeAdminPanel()"><i class="fas fa-eye"></i> View Site</button>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon blue"><i class="fas fa-blog"></i></div>
+                        <div><div class="stat-value" id="adminStatPosts">24</div><div class="stat-label">Total Posts</div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon green"><i class="fas fa-box"></i></div>
+                        <div><div class="stat-value" id="adminStatProducts">156</div><div class="stat-label">Total Products</div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon orange"><i class="fas fa-mouse-pointer"></i></div>
+                        <div><div class="stat-value" id="adminStatClicks">8,432</div><div class="stat-label">Affiliate Clicks</div></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon red"><i class="fas fa-users"></i></div>
+                        <div><div class="stat-value" id="adminStatVisitors">45.2K</div><div class="stat-label">Total Visitors</div></div>
+                    </div>
+                </div>
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="admin-card">
+                            <div class="admin-card-header"><div class="admin-card-title">Traffic Overview</div></div>
+                            <div class="chart-container">
+                                <div class="chart-bars">
+                                    <div class="chart-bar" style="height:40%"><span class="chart-bar-label">Mon</span></div>
+                                    <div class="chart-bar" style="height:65%"><span class="chart-bar-label">Tue</span></div>
+                                    <div class="chart-bar" style="height:50%"><span class="chart-bar-label">Wed</span></div>
+                                    <div class="chart-bar" style="height:80%"><span class="chart-bar-label">Thu</span></div>
+                                    <div class="chart-bar" style="height:70%"><span class="chart-bar-label">Fri</span></div>
+                                    <div class="chart-bar" style="height:90%"><span class="chart-bar-label">Sat</span></div>
+                                    <div class="chart-bar" style="height:75%"><span class="chart-bar-label">Sun</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="admin-card">
+                            <div class="admin-card-header"><div class="admin-card-title">Popular Posts</div></div>
+                            <div id="adminPopularPosts"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="admin-card">
+                    <div class="admin-card-header"><div class="admin-card-title">Recent Activity</div></div>
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead><tr><th>Action</th><th>Item</th><th>User</th><th>Date</th><th>Status</th></tr></thead>
+                            <tbody>
+                                <tr><td><i class="fas fa-plus text-success me-2"></i>Added</td><td>Sony WH-1000XM5 Review</td><td>Admin</td><td>Jun 20, 2026</td><td><span class="status-badge status-published">Published</span></td></tr>
+                                <tr><td><i class="fas fa-edit text-primary me-2"></i>Updated</td><td>iPhone 16 Pro</td><td>Admin</td><td>Jun 19, 2026</td><td><span class="status-badge status-published">Published</span></td></tr>
+                                <tr><td><i class="fas fa-plus text-success me-2"></i>Added</td><td>Best Laptops 2026</td><td>Admin</td><td>Jun 18, 2026</td><td><span class="status-badge status-draft">Draft</span></td></tr>
+                                <tr><td><i class="fas fa-trash text-danger me-2"></i>Deleted</td><td>Old Product Listing</td><td>Admin</td><td>Jun 17, 2026</td><td><span class="status-badge status-draft">Removed</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Posts -->
+            <div id="admin-posts" class="admin-section" style="display:none;">
+                <div class="admin-header">
+                    <h4 class="fw-bold m-0">Blog Posts</h4>
+                    <button class="btn-admin btn-admin-primary" onclick="showPostModal()"><i class="fas fa-plus"></i> Add New Post</button>
+                </div>
+                <div class="admin-card">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead><tr><th>Title</th><th>Author</th><th>Category</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
+                            <tbody id="adminPostsTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products -->
+            <div id="admin-products" class="admin-section" style="display:none;">
+                <div class="admin-header">
+                    <h4 class="fw-bold m-0">Products</h4>
+                    <button class="btn-admin btn-admin-primary" onclick="showProductModal()"><i class="fas fa-plus"></i> Add New Product</button>
+                </div>
+                <div class="admin-card">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead><tr><th>Product</th><th>Category</th><th>Price</th><th>Rating</th><th>Clicks</th><th>Actions</th></tr></thead>
+                            <tbody id="adminProductsTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categories -->
+            <div id="admin-categories" class="admin-section" style="display:none;">
+                <div class="admin-header">
+                    <h4 class="fw-bold m-0">Categories</h4>
+                    <button class="btn-admin btn-admin-primary" onclick="showCategoryModal()"><i class="fas fa-plus"></i> Add Category</button>
+                </div>
+                <div class="admin-card">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead><tr><th>Name</th><th>Slug</th><th>Products</th><th>Posts</th><th>Actions</th></tr></thead>
+                            <tbody id="adminCategoriesTable"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Media Library -->
+            <div id="admin-media" class="admin-section" style="display:none;">
+                <div class="admin-header"><h4 class="fw-bold m-0">Media Library</h4></div>
+                <div class="admin-card">
+                    <div class="d-flex gap-3 mb-4">
+                        <button class="btn-admin btn-admin-primary"><i class="fas fa-upload"></i> Upload Image</button>
+                    </div>
+                    <div class="row g-3" id="mediaGrid">
+                        <div class="col-6 col-md-4 col-lg-3"><div class="position-relative"><img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=200&fit=crop" class="img-fluid rounded-3" alt=""><div class="position-absolute top-0 end-0 p-2"><button class="action-btn delete"><i class="fas fa-trash"></i></button></div></div></div>
+                        <div class="col-6 col-md-4 col-lg-3"><div class="position-relative"><img src="https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=300&h=200&fit=crop" class="img-fluid rounded-3" alt=""><div class="position-absolute top-0 end-0 p-2"><button class="action-btn delete"><i class="fas fa-trash"></i></button></div></div></div>
+                        <div class="col-6 col-md-4 col-lg-3"><div class="position-relative"><img src="https://images.unsplash.com/photo-1585565804112-f201f68c48b4?w=300&h=200&fit=crop" class="img-fluid rounded-3" alt=""><div class="position-absolute top-0 end-0 p-2"><button class="action-btn delete"><i class="fas fa-trash"></i></button></div></div></div>
+                        <div class="col-6 col-md-4 col-lg-3"><div class="position-relative"><img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=200&fit=crop" class="img-fluid rounded-3" alt=""><div class="position-absolute top-0 end-0 p-2"><button class="action-btn delete"><i class="fas fa-trash"></i></button></div></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SEO Settings -->
+            <div id="admin-seo" class="admin-section" style="display:none;">
+                <div class="admin-header"><h4 class="fw-bold m-0">SEO Settings</h4></div>
+                <div class="admin-card">
+                    <form onsubmit="saveSEO(event)">
+                        <div class="form-group"><label class="form-label">Meta Title</label><input type="text" class="form-control" value="JNM Best Finds | Discover the Best Products, Deals & Recommendations"></div>
+                        <div class="form-group"><label class="form-label">Meta Description</label><textarea class="form-control" rows="3">JNM Best Finds - Your trusted source for the best product reviews, deals, and recommendations across Electronics, Home, Automotive, Fashion, Health, Gaming, and more.</textarea></div>
+                        <div class="form-group"><label class="form-label">Meta Keywords</label><input type="text" class="form-control" value="best products, affiliate deals, product reviews, buying guides, electronics, home, kitchen"></div>
+                        <div class="form-group"><label class="form-label">Open Graph Image URL</label><input type="text" class="form-control" placeholder="https://example.com/og-image.jpg"></div>
+                        <div class="form-group"><label class="form-label">Twitter Card Image URL</label><input type="text" class="form-control" placeholder="https://example.com/twitter-image.jpg"></div>
+                        <div class="form-group"><label class="form-label">Google Analytics ID</label><input type="text" class="form-control" placeholder="UA-XXXXXXXXX-X"></div>
+                        <button type="submit" class="btn-admin btn-admin-primary"><i class="fas fa-save me-2"></i>Save SEO Settings</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Affiliate Tracking -->
+            <div id="admin-affiliate" class="admin-section" style="display:none;">
+                <div class="admin-header"><h4 class="fw-bold m-0">Affiliate Click Tracking</h4></div>
+                <div class="row g-4">
+                    <div class="col-lg-8">
+                        <div class="admin-card">
+                            <div class="admin-card-header"><div class="admin-card-title">Click Statistics</div></div>
+                            <div class="chart-container">
+                                <div class="chart-bars">
+                                    <div class="chart-bar" style="height:30%"><span class="chart-bar-label">Jan</span></div>
+                                    <div class="chart-bar" style="height:45%"><span class="chart-bar-label">Feb</span></div>
+                                    <div class="chart-bar" style="height:60%"><span class="chart-bar-label">Mar</span></div>
+                                    <div class="chart-bar" style="height:55%"><span class="chart-bar-label">Apr</span></div>
+                                    <div class="chart-bar" style="height:75%"><span class="chart-bar-label">May</span></div>
+                                    <div class="chart-bar" style="height:85%"><span class="chart-bar-label">Jun</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="admin-card">
+                            <div class="admin-card-header"><div class="admin-card-title">Top Clicked Products</div></div>
+                            <div id="topClickedProducts"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Newsletter -->
+            <div id="admin-newsletter" class="admin-section" style="display:none;">
+                <div class="admin-header">
+                    <h4 class="fw-bold m-0">Newsletter Subscribers</h4>
+                    <button class="btn-admin btn-admin-primary"><i class="fas fa-download"></i> Export CSV</button>
+                </div>
+                <div class="admin-card">
+                    <div class="table-responsive">
+                        <table class="admin-table">
+                            <thead><tr><th>Email</th><th>Date Subscribed</th><th>Status</th><th>Actions</th></tr></thead>
+                            <tbody>
+                                <tr><td>john.doe@example.com</td><td>Jun 20, 2026</td><td><span class="status-badge status-published">Active</span></td><td><button class="action-btn delete"><i class="fas fa-trash"></i></button></td></tr>
+                                <tr><td>sarah.smith@example.com</td><td>Jun 19, 2026</td><td><span class="status-badge status-published">Active</span></td><td><button class="action-btn delete"><i class="fas fa-trash"></i></button></td></tr>
+                                <tr><td>mike.jones@example.com</td><td>Jun 18, 2026</td><td><span class="status-badge status-published">Active</span></td><td><button class="action-btn delete"><i class="fas fa-trash"></i></button></td></tr>
+                                <tr><td>emma.wilson@example.com</td><td>Jun 17, 2026</td><td><span class="status-badge status-draft">Unsubscribed</span></td><td><button class="action-btn delete"><i class="fas fa-trash"></i></button></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings -->
+            <div id="admin-settings" class="admin-section" style="display:none;">
+                <div class="admin-header"><h4 class="fw-bold m-0">Website Settings</h4></div>
+                <div class="admin-card">
+                    <form onsubmit="saveSettings(event)">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group"><label class="form-label">Website Name</label><input type="text" class="form-control" value="JNM Best Finds"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group"><label class="form-label">Tagline</label><input type="text" class="form-control" value="Discover the Best Products, Deals & Recommendations"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group"><label class="form-label">Contact Email</label><input type="email" class="form-control" value="hello@jnmbestfinds.com"></div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group"><label class="form-label">Phone</label><input type="text" class="form-control" value="+1 (555) 123-4567"></div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-group"><label class="form-label">Address</label><input type="text" class="form-control" value="123 Commerce Street, New York, NY 10001"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group"><label class="form-label">Facebook URL</label><input type="text" class="form-control" placeholder="https://facebook.com/..."></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group"><label class="form-label">Twitter URL</label><input type="text" class="form-control" placeholder="https://twitter.com/..."></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group"><label class="form-label">Instagram URL</label><input type="text" class="form-control" placeholder="https://instagram.com/..."></div>
+                            </div>
+                            <div class="col-12">
+                                <button type="submit" class="btn-admin btn-admin-primary"><i class="fas fa-save me-2"></i>Save Settings</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer" id="mainFooter">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-4">
+                    <div class="footer-brand">
+                        <div class="brand-logo"><i class="fas fa-search"></i></div>
+                        JNM Best Finds
+                    </div>
+                    <p class="footer-about">Your trusted destination for expert product reviews, honest comparisons, and exclusive deals. We help you make informed purchasing decisions every day.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showPage('home')">Home</a></li>
+                        <li><a href="#" onclick="showPage('blog')">Blog</a></li>
+                        <li><a href="#" onclick="showPage('products')">Products</a></li>
+                        <li><a href="#" onclick="showPage('comparisons')">Comparisons</a></li>
+                        <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                        <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Categories</h5>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="filterByCategory('electronics')">Electronics</a></li>
+                        <li><a href="#" onclick="filterByCategory('home')">Home & Kitchen</a></li>
+                        <li><a href="#" onclick="filterByCategory('automotive')">Automotive</a></li>
+                        <li><a href="#" onclick="filterByCategory('fashion')">Fashion</a></li>
+                        <li><a href="#" onclick="filterByCategory('health')">Health & Fitness</a></li>
+                        <li><a href="#" onclick="filterByCategory('gaming')">Gaming</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Legal</h5>
+                    <ul class="footer-links">
+                        <li><a href="#" onclick="showPage('privacy')">Privacy Policy</a></li>
+                        <li><a href="#" onclick="showPage('terms')">Terms & Conditions</a></li>
+                        <li><a href="#" onclick="showPage('affiliate')">Affiliate Disclosure</a></li>
+                        <li><a href="#" onclick="showPage('disclaimer')">Disclaimer</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-2 col-md-4">
+                    <h5 class="footer-title">Contact</h5>
+                    <ul class="footer-links">
+                        <li><a href="mailto:hello@jnmbestfinds.com">hello@jnmbestfinds.com</a></li>
+                        <li><a href="#">+1 (555) 123-4567</a></li>
+                        <li><a href="#">New York, NY</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p> JNM Best Finds. All rights reserved. | <a href="#" onclick="showPage('affiliate')" style="color:rgba(255,255,255,0.5);">Affiliate Disclosure</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal-overlay" id="loginModal">
+        <div class="modal-content login-modal">
+            <div class="modal-header">
+                <div></div>
+                <button class="modal-close" onclick="closeLoginModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="login-icon"><i class="fas fa-lock"></i></div>
+            <h3 class="fw-bold mb-2">Admin Login</h3>
+            <p class="text-muted mb-4">Enter your credentials to access the admin panel</p>
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group"><input type="text" class="form-control" placeholder="Username" id="loginUsername" required></div>
+                <div class="form-group"><input type="password" class="form-control" placeholder="Password" id="loginPassword" required></div>
+                <button type="submit" class="btn-primary-custom w-100"><i class="fas fa-sign-in-alt me-2"></i>Login</button>
+            </form>
+            <p class="mt-3 text-muted" style="font-size:0.85rem;">Default: admin / admin123</p>
+        </div>
+    </div>
+
+    <!-- Post Modal -->
+    <div class="modal-overlay" id="postModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fas fa-blog me-2 text-primary"></i>Add/Edit Post</div>
+                <button class="modal-close" onclick="closePostModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <form onsubmit="savePost(event)">
+                <div class="form-group"><label class="form-label">Post Title</label><input type="text" class="form-control" id="postTitle" placeholder="Enter post title" required></div>
+                <div class="row g-3">
+                    <div class="col-md-6"><div class="form-group"><label class="form-label">Category</label><select class="form-select" id="postCategory"><option>Electronics</option><option>Home & Kitchen</option><option>Automotive</option><option>Fashion</option><option>Health</option><option>Gaming</option></select></div></div>
+                    <div class="col-md-6"><div class="form-group"><label class="form-label">Status</label><select class="form-select" id="postStatus"><option value="published">Published</option><option value="draft">Draft</option><option value="scheduled">Scheduled</option></select></div></div>
+                </div>
+                <div class="form-group"><label class="form-label">Featured Image URL</label><input type="text" class="form-control" id="postImage" placeholder="https://example.com/image.jpg"></div>
+                <div class="form-group"><label class="form-label">Excerpt</label><textarea class="form-control" id="postExcerpt" rows="2" placeholder="Short description..."></textarea></div>
+                <div class="form-group"><label class="form-label">Content</label><textarea class="form-control" id="postContent" rows="6" placeholder="Full post content..."></textarea></div>
+                <div class="form-group"><label class="form-label">SEO Meta Title</label><input type="text" class="form-control" id="postMetaTitle" placeholder="SEO title..."></div>
+                <div class="form-group"><label class="form-label">SEO Meta Description</label><textarea class="form-control" id="postMetaDesc" rows="2" placeholder="SEO description..."></textarea></div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn-admin btn-admin-primary"><i class="fas fa-save me-2"></i>Save Post</button>
+                    <button type="button" class="btn-admin btn-admin-danger" onclick="closePostModal()"><i class="fas fa-times me-2"></i>Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fas fa-box me-2 text-primary"></i>Add/Edit Product</div>
+                <button class="modal-close" onclick="closeProductModal()"><i class="fas fa-times"></i></button>
+            </div>
+            <form onsubmit="saveProduct(event)">
+                <div class="form-group"><label class="form-label">Product Name</label><input type="text" class="form-control" id="prodName" placeholder="Enter product name" required></div>
+                <div class="row g-3">
+                    <div class="col-md-6"><div class="form-group"><label class="form-label">Category</label><select class="form-select" id="prodCategory"><option>Electronics</option><option>Home & Kitchen</option><option>Automotive</option><option>Fashion</option><option>Health</option><option>Gaming</option></select></div></div>
+                    <div class="col-md-6"><div class="form-group"><label class="form-label">Price</label><input type="text" class="form-control" id="prodPrice" placeholder="$99.99"></div></div>
+                </div>
+                <div class="row g-3">
+                    <div class="col-md-6"><div class="form-group"><label class="form-label">Rating (1-5)</label><input type="number" class="form-control" id="prodRating" min="1" max="5" step="0.1" value="4.5"></div></div>
+                    <div class="col-md-6"><div class="form-group"><label class="form-label">Original Price</label><input type="text" class="form-control" id="prodOriginal" placeholder="$129.99"></div></div>
+                </div>
+                <div class="form-group"><label class="form-label">Product Image URL</label><input type="text" class="form-control" id="prodImage" placeholder="https://example.com/product.jpg"></div>
+                <div class="form-group"><label class="form-label">Affiliate Link</label><input type="text" class="form-control" id="prodAffiliate" placeholder="https://affiliate-link.com/..."></div>
+                <div class="form-group"><label class="form-label">Description</label><textarea class="form-control" id="prodDesc" rows="3" placeholder="Product description..."></textarea></div>
+                <div class="form-group"><label class="form-label">Features (one per line)</label><textarea class="form-control" id="prodFeatures" rows="3" placeholder="Feature 1&#10;Feature 2&#10;Feature 3"></textarea></div>
+                <div class="row g-3">
+                    <div class="col-md-6"><div class="form-group"><label class="form-label">Pros (one per line)</label><textarea class="form-control" id="prodPros" rows="3" placeholder="Pro 1&#10;Pro 2"></textarea></div></div>
+                    <div class="col-md-6"><div class="form-group"><label class="form-label">Cons (one per line)</label><textarea class="form-control" id="prodCons" rows="3" placeholder="Con 1&#10;Con 2"></textarea></div></div>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="submit" class="btn-admin btn-admin-primary"><i class="fas fa-save me-2"></i>Save Product</button>
+                    <button type="button" class="btn-admin btn-admin-danger" onclick="closeProductModal()"><i class="fas fa-times me-2"></i>Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ========== DATA STORE ==========
+        const categories = [
+            { id: 'electronics', name: 'Electronics & Gadgets', icon: 'fa-laptop', slug: 'electronics', products: 245, posts: 42 },
+            { id: 'home', name: 'Home & Kitchen', icon: 'fa-home', slug: 'home', products: 189, posts: 35 },
+            { id: 'automotive', name: 'Automotive', icon: 'fa-car', slug: 'automotive', products: 98, posts: 18 },
+            { id: 'fashion', name: 'Fashion & Lifestyle', icon: 'fa-tshirt', slug: 'fashion', products: 156, posts: 28 },
+            { id: 'health', name: 'Health & Fitness', icon: 'fa-heartbeat', slug: 'health', products: 134, posts: 31 },
+            { id: 'gaming', name: 'Gaming & Entertainment', icon: 'fa-gamepad', slug: 'gaming', products: 112, posts: 25 },
+            { id: 'baby', name: 'Baby & Kids', icon: 'fa-baby', slug: 'baby', products: 87, posts: 15 },
+            { id: 'books', name: 'Books & Learning', icon: 'fa-book', slug: 'books', products: 76, posts: 12 },
+            { id: 'software', name: 'Software & Digital Tools', icon: 'fa-code', slug: 'software', products: 103, posts: 20 }
+        ];
+
+        const products = [
+            {
+                id: 1, name: 'Sony WH-1000XM5 Wireless Headphones', category: 'electronics', price: '$348.00', original: '$399.99', rating: 4.8, reviews: 2340, badge: 'bestseller',
+                image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop',
+                features: ['Industry-leading noise cancellation', '30-hour battery life', 'Multipoint connection', 'Speak-to-chat'],
+                pros: ['Exceptional noise cancellation', 'Comfortable for long wear', 'Premium sound quality', 'Great battery life'],
+                cons: ['Expensive', 'No IP rating', 'Bulky case'],
+                affiliate: 'https://amzn.to/placeholder1',
+                description: 'The Sony WH-1000XM5 are the gold standard in wireless noise-canceling headphones. With two processors controlling eight microphones, these headphones deliver unprecedented noise cancellation and call quality.'
+            },
+            {
+                id: 2, name: 'Dyson V15 Detect Vacuum', category: 'home', price: '$649.99', original: '$749.99', rating: 4.7, reviews: 1850, badge: 'deal',
+                image: 'https://images.unsplash.com/photo-1558317374-067fb5f30001?w=400&h=300&fit=crop',
+                features: ['Laser dust detection', 'LCD screen', '60-minute runtime', 'Anti-tangle brush'],
+                pros: ['Powerful suction', 'Laser reveals hidden dust', 'Lightweight', 'Excellent filtration'],
+                cons: ['Very expensive', 'Small dust bin', 'Short battery on max mode'],
+                affiliate: 'https://amzn.to/placeholder2',
+                description: 'The Dyson V15 Detect features a laser that reveals microscopic dust on hard floors, while an LCD screen shows what you have sucked up in real time.'
+            },
+            {
+                id: 3, name: 'Apple Watch Series 10', category: 'electronics', price: '$399.00', original: '$429.00', rating: 4.9, reviews: 3200, badge: 'bestseller',
+                image: 'https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&h=300&fit=crop',
+                features: ['Always-on Retina display', 'ECG app', 'Blood oxygen sensor', 'Water resistant 50m'],
+                pros: ['Comprehensive health tracking', 'Seamless iPhone integration', 'Stylish design', 'Huge app ecosystem'],
+                cons: ['Battery life could be better', 'iPhone-only', 'Expensive bands'],
+                affiliate: 'https://amzn.to/placeholder3',
+                description: 'The most advanced Apple Watch yet with a larger display, faster charging, and comprehensive health monitoring features including ECG and blood oxygen.'
+            },
+            {
+                id: 4, name: 'Ninja Foodi 10-in-1 Pressure Cooker', category: 'home', price: '$179.99', original: '$229.99', rating: 4.6, reviews: 4200, badge: 'deal',
+                image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=300&fit=crop',
+                features: ['10 cooking functions', '6.5-quart capacity', 'TenderCrisp technology', 'Dishwasher safe'],
+                pros: ['Versatile cooking options', 'Fast pressure cooking', 'Crispy finish', 'Easy to clean'],
+                cons: ['Large footprint', 'Learning curve', 'Heavy lid'],
+                affiliate: 'https://amzn.to/placeholder4',
+                description: 'The Ninja Foodi combines pressure cooking and air frying in one appliance. Cook meals up to 70% faster than traditional methods and finish with a crispy golden touch.'
+            },
+            {
+                id: 5, name: 'Garmin Forerunner 965', category: 'health', price: '$599.99', original: '$649.99', rating: 4.8, reviews: 890, badge: 'bestseller',
+                image: 'https://images.unsplash.com/photo-1579586337278-3befd40fd17a?w=400&h=300&fit=crop',
+                features: ['AMOLED touchscreen', 'Training readiness score', 'Multi-band GPS', 'Up to 23 days battery'],
+                pros: ['Incredible battery life', 'Detailed training metrics', 'Bright AMOLED display', 'Accurate GPS'],
+                cons: ['Expensive', 'Complex interface', 'Large size'],
+                affiliate: 'https://amzn.to/placeholder5',
+                description: 'The Garmin Forerunner 965 is the ultimate GPS running watch with an AMOLED display, training readiness scores, and up to 23 days of battery life in smartwatch mode.'
+            },
+            {
+                id: 6, name: 'PlayStation 5 Pro Console', category: 'gaming', price: '$699.99', original: '$749.99', rating: 4.9, reviews: 5600, badge: 'bestseller',
+                image: 'https://images.unsplash.com/photo-1606144042614-b2417e99c4e3?w=400&h=300&fit=crop',
+                features: ['8K gaming support', 'Ray tracing', 'Ultra-high speed SSD', '3D Audio'],
+                pros: ['Stunning 4K/8K graphics', 'Lightning-fast load times', 'Exclusive game library', 'Backward compatible'],
+                cons: ['Very expensive', 'Large size', 'Limited storage'],
+                affiliate: 'https://amzn.to/placeholder6',
+                description: 'The PlayStation 5 Pro delivers the ultimate gaming experience with 8K support, advanced ray tracing, and an ultra-high speed SSD for near-instant loading.'
+            },
+            {
+                id: 7, name: 'Tesla Model 3 All-Weather Mats', category: 'automotive', price: '$195.00', original: '$250.00', rating: 4.7, reviews: 1200, badge: 'deal',
+                image: 'https://images.unsplash.com/photo-1617788138017-80ad40651399?w=400&h=300&fit=crop',
+                features: ['Custom fit', 'All-weather protection', 'Easy to clean', 'Odorless material'],
+                pros: ['Perfect fit for Model 3', 'Durable construction', 'Easy installation', 'Great coverage'],
+                cons: ['Premium price', 'Heavy', 'Can be slippery when wet'],
+                affiliate: 'https://amzn.to/placeholder7',
+                description: 'Premium all-weather floor mats designed specifically for the Tesla Model 3. Made from high-quality TPE material that is odorless, durable, and easy to clean.'
+            },
+            {
+                id: 8, name: 'Lululemon Align Leggings', category: 'fashion', price: '$98.00', original: '$118.00', rating: 4.6, reviews: 8900, badge: 'bestseller',
+                image: 'https://images.unsplash.com/photo-1518310383802-640c2de311b2?w=400&h=300&fit=crop',
+                features: ['Buttery-soft Nulu fabric', 'High-rise waist', 'Hidden pocket', 'Four-way stretch'],
+                pros: ['Incredibly comfortable', 'Flattering fit', 'Durable', 'Versatile styling'],
+                cons: ['Pilling over time', 'Pricey', 'Can show sweat'],
+                affiliate: 'https://amzn.to/placeholder8',
+                description: 'The Lululemon Align leggings are made from buttery-soft Nulu fabric that feels weightless and offers gentle compression. Perfect for yoga, lounging, or everyday wear.'
+            }
+        ];
+
+        const blogPosts = [
+            {
+                id: 1, title: '10 Best Wireless Headphones of 2026: Expert Tested', category: 'electronics', author: 'James Mitchell', date: 'Jun 18, 2026',
+                image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=250&fit=crop',
+                excerpt: 'We tested over 50 wireless headphones to find the absolute best options for every budget and use case. From noise-canceling champions to budget-friendly picks.',
+                content: '<p>After spending over 200 hours testing the latest wireless headphones, we have narrowed down the top 10 options that deliver exceptional sound quality, comfort, and value. Whether you are a commuter, audiophile, or fitness enthusiast, there is a perfect pair for you.</p><h3>1. Sony WH-1000XM5 - Best Overall</h3><p>The Sony WH-1000XM5 remains the gold standard for wireless headphones. With industry-leading noise cancellation, 30-hour battery life, and premium sound quality, these headphones are worth every penny.</p><h3>2. Apple AirPods Max - Best for Apple Users</h3><p>For those deep in the Apple ecosystem, the AirPods Max offer seamless integration, spatial audio, and a premium build quality that justifies the price.</p><h3>3. Bose QuietComfort Ultra - Best for Travel</h3><p>Bose brings their legendary comfort and noise cancellation to the table with the QuietComfort Ultra, making them perfect for long flights and commutes.</p>',
+                tags: ['headphones', 'audio', 'tech', 'reviews'],
+                trending: true
+            },
+            {
+                id: 2, title: 'The Ultimate Guide to Smart Home Devices in 2026', category: 'home', author: 'Sarah Chen', date: 'Jun 15, 2026',
+                image: 'https://images.unsplash.com/photo-1558002038-1055907df827?w=400&h=250&fit=crop',
+                excerpt: 'Transform your living space with the latest smart home technology. From voice-controlled lighting to automated security systems, here is everything you need to know.',
+                content: '<p>Smart home technology has evolved dramatically in 2026. Today, you can control virtually every aspect of your home from your smartphone or voice commands. Here is our comprehensive guide to building the perfect smart home.</p><h3>Getting Started with Smart Home</h3><p>The foundation of any smart home is a reliable hub. We recommend starting with either Amazon Alexa, Google Home, or Apple HomeKit depending on your existing devices.</p><h3>Essential Smart Home Devices</h3><p>1. Smart speakers and displays<br>2. Smart lighting systems<br>3. Smart thermostats<br>4. Smart security cameras<br>5. Smart locks and doorbells</p>',
+                tags: ['smart home', 'automation', 'IoT', 'home improvement'],
+                trending: true
+            },
+            {
+                id: 3, title: 'Best Running Shoes for Every Type of Runner', category: 'health', author: 'Mike Torres', date: 'Jun 12, 2026',
+                image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=250&fit=crop',
+                excerpt: 'Whether you are a beginner or marathon veteran, finding the right running shoes is crucial. Our expert runners tested 30+ pairs to find the best options for every foot type.',
+                content: '<p>Choosing the right running shoes can make or break your running experience. We put 30+ pairs through rigorous testing to find the best options for every type of runner.</p><h3>Best for Beginners: Brooks Ghost 16</h3><p>The Brooks Ghost 16 offers the perfect balance of cushioning and responsiveness for new runners. The DNA Loft v3 midsole provides a soft yet springy ride.</p><h3>Best for Speed: Nike Vaporfly 3</h3><p>For race day, nothing beats the Nike Vaporfly 3. The carbon fiber plate and ZoomX foam deliver record-breaking energy return.</p>',
+                tags: ['running', 'fitness', 'shoes', 'health'],
+                trending: false
+            },
+            {
+                id: 4, title: 'Gaming Laptop Buying Guide: What to Look For', category: 'gaming', author: 'Alex Rivera', date: 'Jun 10, 2026',
+                image: 'https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=400&h=250&fit=crop',
+                excerpt: 'Shopping for a gaming laptop can be overwhelming. We break down the key specs, features, and brands to help you make the right choice for your budget.',
+                content: '<p>Gaming laptops have come a long way. Today, you can get desktop-level performance in a portable package. Here is what to look for when shopping for your next gaming laptop.</p><h3>Key Specifications</h3><p><strong>GPU:</strong> The graphics card is the most important component. Look for NVIDIA RTX 40-series or AMD RX 7000-series for the best performance.</p><p><strong>CPU:</strong> A modern Intel Core i7/i9 or AMD Ryzen 7/9 will handle any game you throw at it.</p><p><strong>Display:</strong> 144Hz+ refresh rate is essential for competitive gaming. 1080p is standard, but 1440p offers the sweet spot of clarity and performance.</p>',
+                tags: ['gaming', 'laptops', 'tech', 'buying guide'],
+                trending: true
+            },
+            {
+                id: 5, title: 'Top 5 Car Detailing Products That Actually Work', category: 'automotive', author: 'David Park', date: 'Jun 8, 2026',
+                image: 'https://images.unsplash.com/photo-1601362840469-51e4d8d58785?w=400&h=250&fit=crop',
+                excerpt: 'Keep your car looking showroom-new with these professional-grade detailing products. We tested dozens to find the ones that deliver real results.',
+                content: '<p>Professional car detailing can cost hundreds of dollars. With the right products and techniques, you can achieve similar results at home for a fraction of the cost.</p><h3>1. Chemical Guys Honeydew Snow Foam</h3><p>This pH-neutral car wash soap creates thick, clinging foam that lifts dirt without stripping wax. It is safe for all paint types and leaves a brilliant shine.</p><h3>2. Meguiar's Ultimate Compound</h3><p>For removing swirl marks and light scratches, this compound works wonders. It restores clarity and gloss to faded paint.</p>',
+                tags: ['automotive', 'detailing', 'car care', 'reviews'],
+                trending: false
+            },
+            {
+                id: 6, title: 'Summer Fashion Essentials Under $50', category: 'fashion', author: 'Emma Wilson', date: 'Jun 5, 2026',
+                image: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&h=250&fit=crop',
+                excerpt: 'Stay stylish this summer without breaking the bank. We have curated the best affordable fashion finds that look expensive but cost less than $50.',
+                content: '<p>Summer fashion does not have to cost a fortune. We have scoured the best retailers to find pieces that look designer but are surprisingly affordable.</p><h3>1. Linen Blend Shirt - $29.99</h3><p>A breathable linen-blend shirt is a summer essential. This one from Uniqlo looks premium and keeps you cool on the hottest days.</p><h3>2. High-Waisted Shorts - $24.99</h3><p>These flattering shorts from Aritzia come in multiple colors and are perfect for both casual and dressy occasions.</p>',
+                tags: ['fashion', 'summer', 'budget', 'style'],
+                trending: true
+            }
+        ];
+
+        const comparisons = [
+            {
+                id: 1, title: 'Sony WH-1000XM5 vs Bose QuietComfort Ultra',
+                products: [products[0], {
+                    id: 9, name: 'Bose QuietComfort Ultra', category: 'electronics', price: '$429.00', original: '$479.00', rating: 4.7, reviews: 1800, badge: '',
+                    image: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=400&h=300&fit=crop',
+                    features: ['CustomTune technology', '24-hour battery', 'Immersive audio', 'Premium comfort'],
+                    pros: ['Excellent comfort', 'Great call quality', 'Solid ANC', 'Reliable brand'],
+                    cons: ['Less bass than Sony', 'Shorter battery', 'No multipoint'],
+                    affiliate: 'https://amzn.to/placeholder9',
+                    description: 'Bose QuietComfort Ultra headphones with CustomTune technology and immersive audio.'
+                }],
+                features: [
+                    { label: 'Noise Cancellation', p1: 'Excellent', p2: 'Very Good', winner: 1 },
+                    { label: 'Sound Quality', p1: 'Warm, detailed', p2: 'Balanced, clear', winner: 1 },
+                    { label: 'Battery Life', p1: '30 hours', p2: '24 hours', winner: 1 },
+                    { label: 'Comfort', p1: 'Very Good', p2: 'Excellent', winner: 2 },
+                    { label: 'Price', p1: '$348', p2: '$429', winner: 1 },
+                    { label: 'Multipoint', p1: 'Yes', p2: 'No', winner: 1 },
+                    { label: 'Warranty', p1: '1 year', p2: '1 year', winner: 0 },
+                    { label: 'Weight', p1: '250g', p2: '253g', winner: 1 }
+                ]
+            }
+        ];
+
+        const testimonials = [
+            { name: 'Jennifer Adams', role: 'Tech Enthusiast', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop', text: 'JNM Best Finds has saved me hundreds of dollars. Their reviews are honest and thorough. I bought the Sony headphones they recommended and they are absolutely perfect!' },
+            { name: 'Michael Brooks', role: 'Homeowner', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop', text: 'The comparison tables are incredibly helpful. I was torn between two vacuum cleaners and their side-by-side comparison made my decision so much easier. Highly recommended!' },
+            { name: 'Sarah Kim', role: 'Fitness Coach', avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop', text: 'As a fitness professional, I need reliable gear recommendations. JNM Best Finds consistently delivers expert-level reviews that I can trust and share with my clients.' }
+        ];
+
+        // ========== UTILITY FUNCTIONS ==========
+        function generateStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                if (i <= Math.floor(rating)) stars += '<i class="fas fa-star"></i>';
+                else if (i === Math.ceil(rating) && !Number.isInteger(rating)) stars += '<i class="fas fa-star-half-alt"></i>';
+                else stars += '<i class="far fa-star"></i>';
+            }
+            return stars;
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            const icon = type === 'success' ? 'fa-check-circle' : type === 'error' ? 'fa-exclamation-circle' : 'fa-exclamation-triangle';
+            toast.innerHTML = `<i class="fas ${icon} text-${type === 'success' ? 'success' : type === 'error' ? 'danger' : 'warning'}"></i><span>${message}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 4000);
+        }
+
+        // ========== NAVIGATION ==========
+        function showPage(pageName) {
+            document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+            const target = document.getElementById('page-' + pageName);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // Update nav active state
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => {
+                if (link.getAttribute('onclick') && link.getAttribute('onclick').includes("'" + pageName + "'")) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Close mobile menu
+            const navbarCollapse = document.querySelector('.navbar-collapse');
+            if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                navbarCollapse.classList.remove('show');
+            }
+
+            // Load page-specific content
+            if (pageName === 'home') renderHomePage();
+            if (pageName === 'blog') renderBlogPage();
+            if (pageName === 'products') renderProductsPage();
+            if (pageName === 'comparisons') renderComparisonsPage();
+        }
+
+        // ========== RENDER FUNCTIONS ==========
+        function renderCategories() {
+            const grid = document.getElementById('categoriesGrid');
+            if (!grid) return;
+            grid.innerHTML = categories.map(cat => `
+                <div class="col-6 col-md-4 col-lg-3">
+                    <div class="category-card" onclick="filterByCategory('${cat.id}')">
+                        <div class="category-icon"><i class="fas ${cat.icon}"></i></div>
+                        <h4>${cat.name}</h4>
+                        <p>${cat.products} products</p>
+                        <span class="category-count">${cat.posts} reviews</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderProductCard(product) {
+            return `
+                <div class="col-md-6 col-lg-4 col-xl-3">
+                    <div class="product-card">
+                        <div class="product-image">
+                            <img src="${product.image}" alt="${product.name}" loading="lazy">
+                            ${product.badge ? `<span class="product-badge ${product.badge}">${product.badge === 'bestseller' ? 'Best Seller' : 'Hot Deal'}</span>` : ''}
+                            <div class="product-wishlist"><i class="far fa-heart"></i></div>
+                        </div>
+                        <div class="product-body">
+                            <div class="product-category">${categories.find(c => c.id === product.category)?.name || product.category}</div>
+                            <h5 class="product-title">${product.name}</h5>
+                            <div class="product-rating">
+                                <span class="stars">${generateStars(product.rating)}</span>
+                                <span class="rating-text">${product.rating} (${product.reviews.toLocaleString()})</span>
+                            </div>
+                            <div class="product-price">${product.price}${product.original ? `<span class="original">${product.original}</span>` : ''}</div>
+                            <ul class="product-features">
+                                ${product.features.slice(0, 3).map(f => `<li><i class="fas fa-check"></i> ${f}</li>`).join('')}
+                            </ul>
+                            <button class="btn-affiliate" onclick="trackAffiliateClick(${product.id}); window.open('${product.affiliate}', '_blank')">
+                                <i class="fas fa-external-link-alt"></i> Check Latest Price
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderFeaturedProducts() {
+            const grid = document.getElementById('featuredProducts');
+            if (!grid) return;
+            grid.innerHTML = products.slice(0, 4).map(renderProductCard).join('');
+        }
+
+        function renderTopDeals() {
+            const grid = document.getElementById('topDeals');
+            if (!grid) return;
+            const deals = products.filter(p => p.badge === 'deal');
+            grid.innerHTML = deals.map(renderProductCard).join('');
+        }
+
+        function renderComparisonTable() {
+            const table = document.getElementById('comparisonTable');
+            if (!table) return;
+            const comp = comparisons[0];
+            table.innerHTML = `
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th class="product-col">
+                            <img src="${comp.products[0].image}" alt="${comp.products[0].name}">
+                            <div>${comp.products[0].name}</div>
+                            <div style="color:var(--gold);font-size:0.85rem;">${comp.products[0].price}</div>
+                        </th>
+                        <th class="product-col">
+                            <img src="${comp.products[1].image}" alt="${comp.products[1].name}">
+                            <div>${comp.products[1].name}</div>
+                            <div style="color:var(--gold);font-size:0.85rem;">${comp.products[1].price}</div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    ${comp.features.map(f => `
+                        <tr>
+                            <td><span class="feature-label">${f.label}</span></td>
+                            <td class="text-center">${f.winner === 1 ? '<span class="winner-badge">Winner</span> ' : ''}${f.p1}</td>
+                            <td class="text-center">${f.winner === 2 ? '<span class="winner-badge">Winner</span> ' : ''}${f.p2}</td>
+                        </tr>
+                    `).join('')}
+                    <tr>
+                        <td><span class="feature-label">Action</span></td>
+                        <td class="text-center"><button class="btn-affiliate" style="width:auto;padding:0.5rem 1rem;font-size:0.85rem;" onclick="trackAffiliateClick(${comp.products[0].id}); window.open('${comp.products[0].affiliate}', '_blank')"><i class="fas fa-external-link-alt"></i> Buy Now</button></td>
+                        <td class="text-center"><button class="btn-affiliate" style="width:auto;padding:0.5rem 1rem;font-size:0.85rem;" onclick="trackAffiliateClick(${comp.products[1].id}); window.open('${comp.products[1].affiliate}', '_blank')"><i class="fas fa-external-link-alt"></i> Buy Now</button></td>
+                    </tr>
+                </tbody>
+            `;
+        }
+
+        function renderBlogCard(post) {
+            return `
+                <div class="col-md-6 col-lg-4">
+                    <div class="blog-card" onclick="showBlogDetail(${post.id})">
+                        <div class="blog-image">
+                            <img src="${post.image}" alt="${post.title}" loading="lazy">
+                            <div class="blog-date">${post.date}</div>
+                        </div>
+                        <div class="blog-body">
+                            <div class="blog-meta">
+                                <span><i class="fas fa-user"></i> ${post.author}</span>
+                                <span><i class="fas fa-tag"></i> ${categories.find(c => c.id === post.category)?.name || post.category}</span>
+                            </div>
+                            <h5 class="blog-title">${post.title}</h5>
+                            <p class="blog-excerpt">${post.excerpt}</p>
+                            <a href="#" class="read-more" onclick="event.stopPropagation(); showBlogDetail(${post.id})">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderLatestBlogPosts() {
+            const grid = document.getElementById('latestBlogPosts');
+            if (!grid) return;
+            grid.innerHTML = blogPosts.slice(0, 3).map(renderBlogCard).join('');
+        }
+
+        function renderTrendingReviews() {
+            const grid = document.getElementById('trendingReviews');
+            if (!grid) return;
+            const trending = blogPosts.filter(p => p.trending);
+            grid.innerHTML = trending.map(renderBlogCard).join('');
+        }
+
+        function renderTestimonials() {
+            const grid = document.getElementById('testimonials');
+            if (!grid) return;
+            grid.innerHTML = testimonials.map(t => `
+                <div class="col-md-4">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">"</div>
+                        <p class="testimonial-text">${t.text}</p>
+                        <div class="testimonial-author">
+                            <img src="${t.avatar}" alt="${t.name}" class="testimonial-avatar">
+                            <div>
+                                <div class="testimonial-name">${t.name}</div>
+                                <div class="testimonial-role">${t.role}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderHomePage() {
+            renderCategories();
+            renderFeaturedProducts();
+            renderTopDeals();
+            renderComparisonTable();
+            renderLatestBlogPosts();
+            renderTrendingReviews();
+            renderTestimonials();
+        }
+
+        function renderBlogPage() {
+            const grid = document.getElementById('blogPostsGrid');
+            if (!grid) return;
+            grid.innerHTML = blogPosts.map(renderBlogCard).join('');
+        }
+
+        function renderProductsPage() {
+            const grid = document.getElementById('allProductsGrid');
+            if (!grid) return;
+            grid.innerHTML = products.map(renderProductCard).join('');
+        }
+
+        function renderComparisonsPage() {
+            const container = document.getElementById('comparisonsList');
+            if (!container) return;
+            container.innerHTML = comparisons.map(comp => `
+                <div class="comparison-table-wrapper mb-4">
+                    <div class="p-4 border-bottom">
+                        <h4 class="fw-bold mb-0">${comp.title}</h4>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Feature</th>
+                                    <th class="product-col">
+                                        <img src="${comp.products[0].image}" alt="${comp.products[0].name}">
+                                        <div>${comp.products[0].name}</div>
+                                        <div style="color:var(--gold);">${comp.products[0].price}</div>
+                                    </th>
+                                    <th class="product-col">
+                                        <img src="${comp.products[1].image}" alt="${comp.products[1].name}">
+                                        <div>${comp.products[1].name}</div>
+                                        <div style="color:var(--gold);">${comp.products[1].price}</div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${comp.features.map(f => `
+                                    <tr>
+                                        <td><span class="feature-label">${f.label}</span></td>
+                                        <td class="text-center">${f.winner === 1 ? '<span class="winner-badge">Winner</span> ' : ''}${f.p1}</td>
+                                        <td class="text-center">${f.winner === 2 ? '<span class="winner-badge">Winner</span> ' : ''}${f.p2}</td>
+                                    </tr>
+                                `).join('')}
+                                <tr>
+                                    <td><span class="feature-label">Action</span></td>
+                                    <td class="text-center"><button class="btn-affiliate" style="width:auto;padding:0.5rem 1rem;font-size:0.85rem;" onclick="trackAffiliateClick(${comp.products[0].id}); window.open('${comp.products[0].affiliate}', '_blank')"><i class="fas fa-external-link-alt"></i> Buy Now</button></td>
+                                    <td class="text-center"><button class="btn-affiliate" style="width:auto;padding:0.5rem 1rem;font-size:0.85rem;" onclick="trackAffiliateClick(${comp.products[1].id}); window.open('${comp.products[1].affiliate}', '_blank')"><i class="fas fa-external-link-alt"></i> Buy Now</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ========== PRODUCT DETAIL ==========
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+
+            document.getElementById('productDetailBreadcrumb').textContent = product.name;
+            document.getElementById('productDetailContent').innerHTML = `
+                <div class="row g-4">
+                    <div class="col-lg-6">
+                        <div class="product-gallery">
+                            <img src="${product.image}" alt="${product.name}">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 product-info">
+                        <div class="product-category">${categories.find(c => c.id === product.category)?.name}</div>
+                        <h1>${product.name}</h1>
+                        <div class="product-rating mb-3">
+                            <span class="stars" style="font-size:1.2rem;">${generateStars(product.rating)}</span>
+                            <span class="rating-text">${product.rating} out of 5 (${product.reviews.toLocaleString()} reviews)</span>
+                        </div>
+                        <div class="product-price mb-4" style="font-size:2rem;">${product.price}${product.original ? `<span class="original">${product.original}</span>` : ''}</div>
+                        <p style="color:var(--text-gray);font-size:1.1rem;line-height:1.8;margin-bottom:1.5rem;">${product.description}</p>
+                        <button class="btn-primary-custom mb-4" style="padding:1.2rem 3rem;font-size:1.1rem;" onclick="trackAffiliateClick(${product.id}); window.open('${product.affiliate}', '_blank')">
+                            <i class="fas fa-external-link-alt me-2"></i>Check Latest Price
+                        </button>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="share-btn pinterest"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-4 mt-4">
+                    <div class="col-md-6">
+                        <div class="pros-cons pros">
+                            <h5><i class="fas fa-thumbs-up"></i> Pros</h5>
+                            <ul>${product.pros.map(p => `<li><i class="fas fa-check text-success"></i> ${p}</li>`).join('')}</ul>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="pros-cons cons">
+                            <h5><i class="fas fa-thumbs-down"></i> Cons</h5>
+                            <ul>${product.cons.map(c => `<li><i class="fas fa-times text-danger"></i> ${c}</li>`).join('')}</ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h3 class="fw-bold mb-4">Key Features</h3>
+                        <div class="row g-3">
+                            ${product.features.map(f => `
+                                <div class="col-md-6">
+                                    <div class="d-flex align-items-center gap-3 p-3" style="background:var(--light-gray);border-radius:12px;">
+                                        <div class="brand-logo" style="width:45px;height:45px;font-size:1rem;flex-shrink:0;"><i class="fas fa-star"></i></div>
+                                        <div class="fw-semibold">${f}</div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            showPage('product-detail');
+        }
+
+        // ========== BLOG DETAIL ==========
+        function showBlogDetail(postId) {
+            const post = blogPosts.find(p => p.id === postId);
+            if (!post) return;
+
+            document.getElementById('blogDetailBreadcrumb').textContent = post.title;
+            document.getElementById('blogDetailContent').innerHTML = `
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <img src="${post.image}" alt="${post.title}" class="img-fluid rounded-4 mb-4" style="width:100%;max-height:400px;object-fit:cover;">
+                        <div class="blog-meta mb-3" style="font-size:1rem;">
+                            <span><i class="fas fa-user"></i> ${post.author}</span>
+                            <span><i class="fas fa-calendar"></i> ${post.date}</span>
+                            <span><i class="fas fa-tag"></i> ${categories.find(c => c.id === post.category)?.name}</span>
+                        </div>
+                        <h1 style="font-family:'Playfair Display',serif;font-weight:800;font-size:2.5rem;margin-bottom:1.5rem;">${post.title}</h1>
+                        <div style="color:var(--text-gray);font-size:1.1rem;line-height:1.9;">${post.content}</div>
+                        <div class="share-buttons mt-4">
+                            <span class="fw-bold me-2">Share:</span>
+                            <a href="#" class="share-btn facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="share-btn twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" class="share-btn pinterest"><i class="fab fa-pinterest-p"></i></a>
+                            <a href="#" class="share-btn linkedin"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="share-btn whatsapp"><i class="fab fa-whatsapp"></i></a>
+                        </div>
+                        <div class="related-posts">
+                            <h4 class="fw-bold mb-4">Related Articles</h4>
+                            <div class="row g-4">
+                                ${blogPosts.filter(p => p.id !== postId && p.category === post.category).slice(0, 2).map(renderBlogCard).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            showPage('blog-detail');
+        }
+
+        // ========== SEARCH ==========
+        function handleSearch(query) {
+            const resultsDiv = document.getElementById('searchResults');
+            if (!query || query.length < 2) {
+                resultsDiv.classList.remove('show');
+                return;
+            }
+
+            const lowerQuery = query.toLowerCase();
+            const productResults = products.filter(p => p.name.toLowerCase().includes(lowerQuery));
+            const blogResults = blogPosts.filter(b => b.title.toLowerCase().includes(lowerQuery));
+
+            if (productResults.length === 0 && blogResults.length === 0) {
+                resultsDiv.innerHTML = '<div class="search-result-item"><div class="text-muted">No results found</div></div>';
+            } else {
+                resultsDiv.innerHTML = '';
+                if (productResults.length > 0) {
+                    resultsDiv.innerHTML += '<div class="px-3 py-2 fw-bold text-muted" style="font-size:0.8rem;text-transform:uppercase;">Products</div>';
+                    resultsDiv.innerHTML += productResults.slice(0, 3).map(p => `
+                        <div class="search-result-item" onclick="showProductDetail(${p.id}); document.getElementById('searchResults').classList.remove('show');">
+                            <img src="${p.image}" alt="${p.name}">
+                            <div><div class="fw-bold">${p.name}</div><div style="font-size:0.8rem;color:var(--text-gray);">${p.price}</div></div>
+                        </div>
+                    `).join('');
+                }
+                if (blogResults.length > 0) {
+                    resultsDiv.innerHTML += '<div class="px-3 py-2 fw-bold text-muted" style="font-size:0.8rem;text-transform:uppercase;">Articles</div>';
+                    resultsDiv.innerHTML += blogResults.slice(0, 3).map(b => `
+                        <div class="search-result-item" onclick="showBlogDetail(${b.id}); document.getElementById('searchResults').classList.remove('show');">
+                            <img src="${b.image}" alt="${b.title}">
+                            <div><div class="fw-bold">${b.title}</div><div style="font-size:0.8rem;color:var(--text-gray);">by ${b.author}</div></div>
+                        </div>
+                    `).join('');
+                }
+            }
+            resultsDiv.classList.add('show');
+        }
+
+        // ========== FILTER ==========
+        function filterProducts() {
+            const filter = document.getElementById('productFilter').value;
+            const grid = document.getElementById('allProductsGrid');
+            if (!grid) return;
+
+            const filtered = filter === 'all' ? products : products.filter(p => p.category === filter);
+            grid.innerHTML = filtered.map(renderProductCard).join('');
+        }
+
+        function filterByCategory(catId) {
+            showPage('products');
+            setTimeout(() => {
+                document.getElementById('productFilter').value = catId;
+                filterProducts();
+            }, 100);
+        }
+
+        // ========== AFFILIATE TRACKING ==========
+        let affiliateClicks = JSON.parse(localStorage.getItem('jnm_clicks') || '[]');
+
+        function trackAffiliateClick(productId) {
+            affiliateClicks.push({ productId, timestamp: new Date().toISOString() });
+            localStorage.setItem('jnm_clicks', JSON.stringify(affiliateClicks));
+            showToast('Opening affiliate link...', 'success');
+        }
+
+        // ========== NEWSLETTER ==========
+        function handleSubscribe(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail').value;
+            let subscribers = JSON.parse(localStorage.getItem('jnm_subscribers') || '[]');
+            subscribers.push({ email, date: new Date().toISOString() });
+            localStorage.setItem('jnm_subscribers', JSON.stringify(subscribers));
+            document.getElementById('newsletterEmail').value = '';
+            showToast('Thank you for subscribing!', 'success');
+        }
+
+        function handleContact(e) {
+            e.preventDefault();
+            showToast('Message sent successfully! We will get back to you soon.', 'success');
+            e.target.reset();
+        }
+
+        // ========== DARK MODE ==========
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.getElementById('darkModeIcon');
+            if (document.body.classList.contains('dark-mode')) {
+                icon.className = 'fas fa-sun';
+                localStorage.setItem('jnm_darkmode', 'true');
+            } else {
+                icon.className = 'fas fa-moon';
+                localStorage.setItem('jnm_darkmode', 'false');
+            }
+        }
+
+        // ========== ADMIN PANEL ==========
+        function showLoginModal() {
+            document.getElementById('loginModal').classList.add('show');
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.remove('show');
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const username = document.getElementById('loginUsername').value;
+            const password = document.getElementById('loginPassword').value;
+
+            if (username === 'admin' && password === 'admin123') {
+                closeLoginModal();
+                document.getElementById('adminPanel').classList.add('active');
+                document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('mainFooter').style.display = 'none';
+                document.getElementById('navbar').style.display = 'none';
+                renderAdminDashboard();
+                showToast('Welcome to the Admin Panel!', 'success');
+            } else {
+                showToast('Invalid credentials. Try admin / admin123', 'error');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('adminPanel').classList.remove('active');
+            document.getElementById('mainContent').style.display = 'block';
+            document.getElementById('mainFooter').style.display = 'block';
+            document.getElementById('navbar').style.display = 'block';
+            showPage('home');
+        }
+
+        function closeAdminPanel() {
+            logoutAdmin();
+        }
+
+        function showAdminSection(section) {
+            document.querySelectorAll('.admin-section').forEach(s => s.style.display = 'none');
+            document.querySelectorAll('.admin-menu-link').forEach(l => l.classList.remove('active'));
+
+            const target = document.getElementById('admin-' + section);
+            if (target) target.style.display = 'block';
+
+            const activeLink = document.querySelector(`.admin-menu-link[onclick*="'${section}'"]`) || 
+                               document.querySelector(`.admin-menu-link[onclick*="${section}"]`);
+            if (activeLink) activeLink.classList.add('active');
+
+            if (section === 'dashboard') renderAdminDashboard();
+            if (section === 'posts') renderAdminPosts();
+            if (section === 'products') renderAdminProducts();
+            if (section === 'categories') renderAdminCategories();
+            if (section === 'affiliate') renderAdminAffiliate();
+        }
+
+        function renderAdminDashboard() {
+            const popularPosts = document.getElementById('adminPopularPosts');
+            if (popularPosts) {
+                popularPosts.innerHTML = blogPosts.slice(0, 5).map(p => `
+                    <div class="d-flex align-items-center gap-3 mb-3 pb-3" style="border-bottom:1px solid var(--border);">
+                        <img src="${p.image}" alt="" style="width:60px;height:45px;object-fit:cover;border-radius:8px;">
+                        <div style="flex:1;"><div class="fw-bold" style="font-size:0.9rem;">${p.title}</div><div style="font-size:0.8rem;color:var(--text-gray);">${p.views || Math.floor(Math.random() * 5000 + 1000)} views</div></div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function renderAdminPosts() {
+            const tbody = document.getElementById('adminPostsTable');
+            if (!tbody) return;
+            tbody.innerHTML = blogPosts.map(p => `
+                <tr>
+                    <td><div class="d-flex align-items-center gap-2"><img src="${p.image}" style="width:40px;height:30px;object-fit:cover;border-radius:4px;"><span class="fw-semibold">${p.title}</span></div></td>
+                    <td>${p.author}</td>
+                    <td>${categories.find(c => c.id === p.category)?.name || p.category}</td>
+                    <td>${p.date}</td>
+                    <td><span class="status-badge status-published">Published</span></td>
+                    <td><div class="action-btns"><button class="action-btn edit"><i class="fas fa-edit"></i></button><button class="action-btn delete"><i class="fas fa-trash"></i></button></div></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAdminProducts() {
+            const tbody = document.getElementById('adminProductsTable');
+            if (!tbody) return;
+            tbody.innerHTML = products.map(p => `
+                <tr>
+                    <td><div class="d-flex align-items-center gap-2"><img src="${p.image}" style="width:40px;height:30px;object-fit:cover;border-radius:4px;"><span class="fw-semibold">${p.name}</span></div></td>
+                    <td>${categories.find(c => c.id === p.category)?.name || p.category}</td>
+                    <td>${p.price}</td>
+                    <td>${generateStars(p.rating)} ${p.rating}</td>
+                    <td>${Math.floor(Math.random() * 500 + 50)}</td>
+                    <td><div class="action-btns"><button class="action-btn edit"><i class="fas fa-edit"></i></button><button class="action-btn delete"><i class="fas fa-trash"></i></button></div></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAdminCategories() {
+            const tbody = document.getElementById('adminCategoriesTable');
+            if (!tbody) return;
+            tbody.innerHTML = categories.map(c => `
+                <tr>
+                    <td><div class="d-flex align-items-center gap-2"><i class="fas ${c.icon} text-primary"></i><span class="fw-semibold">${c.name}</span></div></td>
+                    <td>${c.slug}</td>
+                    <td>${c.products}</td>
+                    <td>${c.posts}</td>
+                    <td><div class="action-btns"><button class="action-btn edit"><i class="fas fa-edit"></i></button><button class="action-btn delete"><i class="fas fa-trash"></i></button></div></td>
+                </tr>
+            `).join('');
+        }
+
+        function renderAdminAffiliate() {
+            const container = document.getElementById('topClickedProducts');
+            if (!container) return;
+            container.innerHTML = products.slice(0, 5).map((p, i) => `
+                <div class="d-flex align-items-center gap-3 mb-3 pb-3" style="border-bottom:1px solid var(--border);">
+                    <div class="fw-bold" style="width:25px;height:25px;background:linear-gradient(135deg,var(--royal-blue),var(--gold));color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.8rem;">${i+1}</div>
+                    <div style="flex:1;"><div class="fw-bold" style="font-size:0.9rem;">${p.name}</div><div style="font-size:0.8rem;color:var(--text-gray);">${Math.floor(Math.random() * 1000 + 200)} clicks</div></div>
+                </div>
+            `).join('');
+        }
+
+        function showPostModal() { document.getElementById('postModal').classList.add('show'); }
+        function closePostModal() { document.getElementById('postModal').classList.remove('show'); }
+        function showProductModal() { document.getElementById('productModal').classList.add('show'); }
+        function closeProductModal() { document.getElementById('productModal').classList.remove('show'); }
+
+        function savePost(e) {
+            e.preventDefault();
+            closePostModal();
+            showToast('Post saved successfully!', 'success');
+            renderAdminPosts();
+        }
+
+        function saveProduct(e) {
+            e.preventDefault();
+            closeProductModal();
+            showToast('Product saved successfully!', 'success');
+            renderAdminProducts();
+        }
+
+        function saveSEO(e) {
+            e.preventDefault();
+            showToast('SEO settings saved!', 'success');
+        }
+
+        function saveSettings(e) {
+            e.preventDefault();
+            showToast('Settings saved successfully!', 'success');
+        }
+
+        function showCategoryModal() { showToast('Category management coming soon!', 'warning'); }
+
+        // ========== SCROLL EFFECTS ==========
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const backToTop = document.getElementById('backToTop');
+
+            if (window.scrollY > 100) {
+                navbar.classList.add('sticky');
+                backToTop.classList.add('show');
+            } else {
+                navbar.classList.remove('sticky');
+                backToTop.classList.remove('show');
+            }
+
+            // Fade in animations
+            document.querySelectorAll('.fade-in').forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 100) {
+                    el.classList.add('visible');
+                }
+            });
+        });
+
+        // Close search results when clicking outside
+        document.addEventListener('click', (e) => {
+            const searchBox = document.querySelector('.search-box');
+            if (searchBox && !searchBox.contains(e.target)) {
+                document.getElementById('searchResults').classList.remove('show');
+            }
+        });
+
+        // Close modals on escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeLoginModal();
+                closePostModal();
+                closeProductModal();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check dark mode preference
+            if (localStorage.getItem('jnm_darkmode') === 'true') {
+                toggleDarkMode();
+            }
+
+            renderHomePage();
+
+            // Trigger initial fade-in
+            setTimeout(() => {
+                document.querySelectorAll('.fade-in').forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < window.innerHeight) el.classList.add('visible');
+                });
+            }, 100);
+        });
+    </script>
+</body>
+</html>
